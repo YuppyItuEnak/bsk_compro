@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\articles;
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -17,7 +20,14 @@ class UserController extends Controller
     {
 
         $user = Auth::user();
-        return view("users_pages.dashboard_user", compact('user'));
+
+        if ($user->role == "user") {
+            return view("users_pages.dashboard_user", compact('user'));
+        } elseif ($user->role == "admin") {
+            $products = Products::all();
+            $articles = Articles::all();
+            return view("admin_pages.account_admin", compact('user', 'products', 'articles'));
+        }
     }
 
     /**
@@ -38,22 +48,41 @@ class UserController extends Controller
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'image_url' => 'nullable|string',
+            'phone'    => 'nullable|string|max:20',
+            'image_url' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ]);
+
+        $imagePath = null; // Variabel untuk menyimpan path gambar
+
+        if ($request->hasFile('image_url')) {
+            // Ambil file yang diupload
+            $image = $request->file('image_url');
+
+            // Buat nama file unik
+            $fileName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+
+            // Simpan file ke direktori 'public/images' (menggunakan symlink)
+            // Pastikan Anda telah menjalankan 'php artisan storage:link' sebelumnya
+            $imagePath = $image->storeAs('images', $fileName, 'public');
+            // Hasilnya akan berupa 'images/namafileunik.ext'
+        }
 
         User::create([
             'name'      => $request->name,
             'email'     => strtolower($request->email),
             'password' => Hash::make($request->password),
-            'image_url' => $request->image_url,
+            'image_url' => $imagePath,
+            'phone'     => $request->phone,
             'role'      => 'user',
         ]);
 
-        return redirect()->route('auth.login')->with('success', 'Register Berhasil!');
+        return redirect()->route('login')->with('success', 'Register Berhasil!');
     }
 
 
-    public function directLogin(){
+    public function directLogin()
+    {
         return view('login_page');
     }
 
@@ -76,10 +105,7 @@ class UserController extends Controller
 
             // cek role dan redirect
             if ($user->role === 'admin') {
-                // return redirect()->route('admin.home');   // ganti dengan route admin kamu
-                return back()->withErrors([
-                    'role' => 'admin',
-                ]);
+                return view('admin_pages.dashboard_admin');
             }
 
             if ($user->role === 'user') {
@@ -94,6 +120,16 @@ class UserController extends Controller
         return back()->withErrors([
             'email' => 'Email atau password salah',
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
 
