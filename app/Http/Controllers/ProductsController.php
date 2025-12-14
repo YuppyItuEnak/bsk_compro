@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Info_Perusahaans;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -13,8 +15,14 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Products::all();
+        $user = Auth::user();
 
-        return view('admin_pages.products.index', compact('products'));
+        if ($user && $user->role === 'admin') {
+            return view('admin_pages.products.index', compact('products'));
+        }
+
+        // DEFAULT: user / guest
+        return view('users_pages.product', compact('products'));
     }
 
     /**
@@ -30,10 +38,11 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'nama_produk'      => 'required|string|max:255',
             'harga_produk'     => 'required|integer|min:0',
             'deskripsi_produk' => 'required|string',
+            'is_favorite'      => 'required|boolean',
             'gambar_produk'    => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -44,32 +53,54 @@ class ProductsController extends Controller
         Products::create($validated);
 
         return redirect()
-            ->route('adminProducts.index')
+            ->route('products.index')
             ->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Products $products)
+    public function show(Products $product)
     {
-        // return view('admin_pages.products.show', compact('product'));
+        $companyPhoneNumber = Info_Perusahaans::where('telepon_perusahaan', '!=', null)
+            ->value('telepon_perusahaan');
+
+        // $products = Products::all();
+        return view('users_pages.detail_product', compact('product', 'companyPhoneNumber'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Products $products)
+    public function edit(Products $product)
     {
-        //
+        return view('admin_pages.products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $products)
+    public function update(Request $request, Products $product)
     {
-        //
+        $validated = $request->validate([
+            'nama_produk'      => 'required|string|max:255',
+            'harga_produk'     => 'required|integer|min:0',
+            'deskripsi_produk' => 'required|string',
+            'is_favorite'      => 'required|boolean',
+            'gambar_produk'    => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // Upload gambar jika ada
+        if ($request->hasFile('gambar_produk')) {
+            $validated['gambar_produk'] = $request->file('gambar_produk')
+                ->store('products', 'public');
+        }
+
+        $product->update($validated);
+
+        return redirect()
+            ->route('products.index')
+            ->with('success', 'Produk berhasil diperbarui');
     }
 
     /**

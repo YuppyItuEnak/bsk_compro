@@ -54,21 +54,28 @@
 
         <!-- Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <x-card-product class="h-full" title="EVA PE" harga="Rp. 450,000" image="images/dumm4.jpg"
-                description="Material ringan, fleksibel, dan tahan air. Ideal untuk alas kaki, packaging, dan aplikasi olahraga."></x-card-product>
-            <x-card-product class="h-full" title="EVA Rubber" harga="Rp. 450,000" image="images/dumm4.jpg"
-                description="Kombinasi kekuatan karet dengan fleksibilitas EVA. Tahan lama, anti-slip, dan tahan cuaca ekstrem."></x-card-product>
-            <x-card-product class="h-full" title="Pylon Rubber" harga="Rp. 450,000" image="images/dumm4.jpg"
-                description="Material karet padat dengan daya tahan tinggi. Cocok untuk aplikasi industri berat dan konstruksi."></x-card-product>
+            @forelse ($products as $product)
+                <x-card-product class="h-full" title="{{ $product->nama_produk }}"
+                    harga="Rp {{ number_format($product->harga_produk, 0, ',', '.') }}"
+                    image="{{ asset('storage/' . $product->gambar_produk) }}"
+                    description="{{ Str::limit($product->deskripsi_produk, 100) }}"
+                    routeLink="{{ route('products.show', $product->id) }}" />
+            @empty
+                <p class="col-span-3 text-center text-gray-500">
+                    Produk belum tersedia.
+                </p>
+            @endforelse
         </div>
     </section>
 
 
     <section class="bg-blue-800 text-white py-50 text-center">
         <h1 class="text-4xl font-bold max-w-3xl mx-auto leading-tight">Butuh Spesifikasi Custom?</h1>
-        <p class="text-2xl font-bold max-w-3xl mx-auto leading-tight mt-2">Kami siap membantu Anda menemukan solusi material yang tepat untuk kebutuhan spesifik Anda.</p>
+        <p class="text-2xl font-bold max-w-3xl mx-auto leading-tight mt-2">Kami siap membantu Anda menemukan solusi
+            material yang tepat untuk kebutuhan spesifik Anda.</p>
         <div class="mt-15">
-            <a href="#" class="bg-red-600 mx-auto border border-red px-6 py-3 text-white font-semibold rounded-lg">
+            <a href="#"
+                class="bg-red-600 mx-auto border border-red px-6 py-3 text-white font-semibold rounded-lg">
                 Hubungi Kami
             </a>
         </div>

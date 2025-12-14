@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Models\Info_Perusahaans;
 use App\Models\Products;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Polyfill\Intl\Idn\Info;
 
 class DashboardController extends Controller
 {
@@ -16,12 +19,12 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->role == "user") {
-            return view("users_pages.dashboard_user", compact('user'));
-        } elseif ($user->role == "admin") {
+
+        if ($user && $user->role === 'admin') {
             $totalProducts = Products::count();
             $totalArticles = Articles::count();
 
+            $totalUser = User::where('role', 'user')->count();;
             // Artikel 7 hari terakhir
             $recentArticles = Articles::where('created_at', '>=', now()->subDays(7))->count();
 
@@ -32,7 +35,8 @@ class DashboardController extends Controller
                     'product' as type,
                     nama_produk as title,
                     harga_produk as subtitle,
-                    created_at
+                    created_at,
+                    NULL as waktu_publikasi
                 ")
                         ->latest()
                         ->limit(10)
@@ -43,9 +47,21 @@ class DashboardController extends Controller
                     'article' as type,
                     judul_artikel as title,
                     isi_artikel as subtitle,
-                    created_at
+                    created_at,
+                    waktu_publikasi
                 ")
                         ->latest()
+                        ->limit(10)
+                        ->get()
+                )
+                ->merge(
+                    Info_Perusahaans::selectRaw("
+                    'companyInfo' as type,
+                    alamat_perusahaan as title,
+                    email_perusahaan as subtitle,
+                    created_at,
+                    NULL as waktu_publikasi
+                    ")->latest()
                         ->limit(10)
                         ->get()
                 )
@@ -55,10 +71,13 @@ class DashboardController extends Controller
             return view('admin_pages.dashboard_admin', compact(
                 'totalProducts',
                 'totalArticles',
+                'totalUser',
                 'recentArticles',
                 'activities'
             ));
         }
+        $productUnggulan = Products::all();
+        return view("users_pages.home", compact('user', 'productUnggulan'));
     }
 
     /**

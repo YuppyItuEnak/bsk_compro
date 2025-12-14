@@ -1,12 +1,13 @@
 <x-layouts.admin.layout>
     <h1 class="text-3xl font-extrabold text-gray-900 mb-8 border-b pb-2">
-        ✨ Tambah Produk Baru
+        ✨ Edit Product
     </h1>
 
     <div class="bg-white rounded-xl shadow-2xl p-8 max-w-4xl mx-auto border border-gray-100">
 
-        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('products.update', $product) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
@@ -20,7 +21,8 @@
                     <div class="mb-5">
                         <label for="nama_produk" class="block text-sm font-medium text-gray-700 mb-2">Nama Produk</label>
                         <input type="text" id="nama_produk" name="nama_produk"
-                            placeholder="Masukkan nama produk yang jelas"
+                            placeholder="Masukkan nama produk yang jelas" {{-- PERBAIKAN 1: Pastikan VALUE-nya benar --}}
+                            value="{{ old('nama_produk', $product->nama_produk) }}"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
                             required>
                         <p class="mt-1 text-xs text-gray-500">Contoh: Sepatu Lari Ultraboost 22</p>
@@ -34,7 +36,8 @@
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3">
                                 <span class="text-gray-500 sm:text-sm">Rp</span>
                             </div>
-                            <input type="number" id="harga_produk" name="harga_produk" placeholder="Cth: 450000"
+                            <input type="number" id="harga_produk" name="harga_produk" placeholder="Cth: 150000"
+                                {{-- PERBAIKAN 2: VALUE harus di properti value, bukan placeholder. Tambahkan old() untuk validasi error --}} value="{{ old('harga_produk', $product->harga_produk) }}"
                                 class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
                                 required>
                         </div>
@@ -57,10 +60,10 @@
                         <select id="is_favorite" name="is_favorite"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-150"
                             required>
-                            {{-- Nilai 1 (true) untuk Ya --}}
-                            <option value="1">Ya (Tampilkan di Beranda/Featured)</option>
-                            {{-- Nilai 0 (false) untuk Tidak --}}
-                            <option value="0" selected>Tidak</option>
+                            {{-- PERBAIKAN 3: Gunakan @selected() untuk menentukan nilai yang tersimpan --}}
+                            <option value="1" @selected(old('is_favorite', $product->is_favorite) == 1)>Ya (Tampilkan di Beranda/Featured)
+                            </option>
+                            <option value="0" @selected(old('is_favorite', $product->is_favorite) == 0)>Tidak</option>
                         </select>
                         <p class="mt-1 text-xs text-gray-500">Tentukan apakah produk ini masuk kategori favorit atau
                             unggulan.</p>
@@ -80,13 +83,24 @@
                         <textarea id="deskripsi_produk" name="deskripsi_produk" rows="6"
                             placeholder="Jelaskan detail, fitur, dan spesifikasi produk di sini..."
                             class="w-full border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 p-3"
-                            required></textarea>
+                            required>{{ old('deskripsi_produk',$product->deskripsi_produk) }}
+                        </textarea>
                     </div>
 
                     {{-- 5. Gambar Produk Utama (gambar_produk) --}}
                     <div class="mb-5">
                         <label for="gambar_produk" class="block text-sm font-medium text-gray-700 mb-2">Gambar Produk
-                            Utama</label>
+                            Utama (Saat Ini: {{ basename($product->gambar_produk ?? 'Tidak Ada') }})</label>
+
+                        {{-- Tambahkan Tampilan Gambar Produk Saat Ini (opsional tapi disarankan) --}}
+                        @if ($product->gambar_produk ?? false)
+                            <div class="mb-3">
+                                {{-- Asumsi path gambar_produk disimpan di storage/public --}}
+                                <img src="{{ asset('storage/' . $product->gambar_produk) }}"
+                                    alt="Gambar Produk Saat Ini"
+                                    class="w-24 h-24 object-cover rounded-md border border-gray-200 shadow-sm">
+                            </div>
+                        @endif
 
                         <div
                             class="flex items-center space-x-4 p-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-indigo-400 transition duration-150 cursor-pointer">
@@ -98,9 +112,10 @@
                             </svg>
                             <input type="file" id="gambar_produk" name="gambar_produk"
                                 class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 cursor-pointer"
-                                accept="image/*" required>
+                                accept="image/*"> {{-- Hapus 'required' jika ini adalah update dan gambar lama sudah ada --}}
                         </div>
-                        <p class="mt-1 text-xs text-gray-500">Format: JPG, PNG. Ukuran maksimal: 2MB.</p>
+                        <p class="mt-1 text-xs text-gray-500">Biarkan kosong jika tidak ingin mengubah gambar. Format:
+                            JPG, PNG. Ukuran maksimal: 2MB.</p>
                     </div>
                 </div>
             </div>
@@ -114,7 +129,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
                             </path>
                         </svg>
-                        Simpan Produk Baru
+                        Simpan Perubahan
                     </span>
                 </button>
             </div>

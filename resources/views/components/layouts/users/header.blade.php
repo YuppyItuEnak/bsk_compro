@@ -96,19 +96,19 @@
         <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
             <ul
                 class="flex flex-col p-4 md:p-0 mt-4 font-semibold border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
-                <li><a href="/"
+                <li><a href="{{ route('dashboard.index') }}"
                         class="block py-2 px-3 text-gray-700 hover:text-blue-700 transition duration-150 md:p-0"
                         aria-current="page">Beranda</a></li>
-                <li><a href="/product"
+                <li><a href="{{ route('products.index') }}"
                         class="block py-2 px-3 text-gray-700 hover:text-blue-700 transition duration-150 md:p-0">Produk</a>
                 </li>
-                <li><a href="/article"
+                <li><a href="{{ route('articles.index') }}"
                         class="block py-2 px-3 text-gray-700 hover:text-blue-700 transition duration-150 md:p-0">Artikel</a>
                 </li>
                 <li><a href="/about"
                         class="block py-2 px-3 text-gray-700 hover:text-blue-700 transition duration-150 md:p-0">Tentang</a>
                 </li>
-                <li><a href="/contact"
+                <li><a href="{{ route('companyInfo.index') }}"
                         class="block py-2 px-3 text-gray-700 hover:text-blue-700 transition duration-150 md:p-0">Kontak</a>
                 </li>
             </ul>

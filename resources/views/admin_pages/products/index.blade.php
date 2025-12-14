@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center mb-6">
         <h1 class="text-3xl font-extrabold text-gray-900">Manajemen Produk</h1>
 
-        <a href="{{ route('adminProducts.create') }}"
+        <a href="{{ route('products.create') }}"
             class="px-6 py-2 bg-indigo-600 text-white font-bold rounded-xl shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-[1.02] flex items-center">
             <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
@@ -27,6 +27,8 @@
                             Harga</th>
                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Deskripsi</th>
+                         <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Produk Unggulan</th>
                         <th class="px-6 py-3 text-right text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             <svg class="w-4 h-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -70,6 +72,10 @@
                                 {{ $product->deskripsi_produk }}
                             </td>
 
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">
+                                {{ $product->is_favorite ? 'Ya' : 'Tidak' }}
+                            </td>
+
                             {{-- Aksi --}}
                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
@@ -97,7 +103,7 @@
 
                                             {{-- Tombol Edit --}}
                                             <li>
-                                                <a href="{{ route('adminProducts.edit', $product->id) }}"
+                                                <a href="{{ route('products.edit', $product->id) }}"
                                                     class="block px-4 py-2 hover:bg-gray-100 text-indigo-600 font-medium flex items-center">
                                                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -112,7 +118,7 @@
 
                                             {{-- Tombol Hapus --}}
                                             <li>
-                                                <form action="{{ route('adminProducts.destroy', $product->id) }}"
+                                                <form action="{{ route('products.destroy', $product->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

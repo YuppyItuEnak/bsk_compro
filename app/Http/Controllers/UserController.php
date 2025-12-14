@@ -105,11 +105,11 @@ class UserController extends Controller
 
             // cek role dan redirect
             if ($user->role === 'admin') {
-                return view('admin_pages.dashboard_admin');
+                return redirect()->route('auth.index'); // ganti dengan route admin kamu
             }
 
             if ($user->role === 'user') {
-                return view('users_pages.home');    // ganti dengan route user kamu
+                return redirect()->route('auth.index');    // ganti dengan route user kamu
             }
 
             // default

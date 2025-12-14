@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\articles;
+use App\Models\Articles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
@@ -12,7 +13,15 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Articles::all();
+        $user = Auth::user();
+
+        if ($user && $user->role === 'admin') {
+            return view('admin_pages.articles.index', compact('articles'));
+        }
+
+        return view('users_pages.article', compact('articles'));
+
     }
 
     /**
@@ -20,7 +29,7 @@ class ArticlesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin_pages.articles.create');
     }
 
     /**
@@ -28,7 +37,25 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'judul_artikel'   => 'required|string|max:255',
+            'isi_artikel'     => 'required|string',
+            'gambar_artikel'  => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'waktu_publikasi' => 'nullable|date',
+        ]);
+
+        // Upload gambar
+        if ($request->hasFile('gambar_artikel')) {
+            $validated['gambar_artikel'] = $request
+                ->file('gambar_artikel')
+                ->store('articles', 'public');
+        }
+
+        Articles::create($validated);
+
+        return redirect()
+            ->route('articles.index')
+            ->with('success', 'Artikel berhasil ditambahkan');
     }
 
     /**
@@ -44,7 +71,7 @@ class ArticlesController extends Controller
      */
     public function edit(articles $articles)
     {
-        //
+
     }
 
     /**

@@ -12,15 +12,17 @@ class cardProduct extends Component
     public $harga;
     public $image;
     public $description;
+    public $routeLink;
     /**
      * Create a new component instance.
      */
-    public function __construct($title, $harga, $image, $description)
+    public function __construct($title, $harga, $image, $description, $routeLink)
     {
         $this->title = $title;
         $this->harga = $harga;
         $this->image = $image;
         $this->description = $description;
+        $this->routeLink = $routeLink;
     }
 
     /**

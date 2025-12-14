@@ -38,7 +38,7 @@
                     </div>
 
                     <p class="text-gray-600 text-m leading-relaxed mt-2">
-                        PT. BSK Indonesia Dusun Kowang, Kabupaten Jombang Jawa Timur 61419, Indonesia
+                        {{ $companyInfo->alamat_perusahaan }}
                     </p>
                 </div>
 
@@ -69,10 +69,12 @@
 
             </div>
 
-            <!-- MAPS -->
-            <div>
-                <div id="map" class="w-full h-64 md:h-full rounded-lg shadow-md"></div>
+            <div class="w-full h-64 md:h-full rounded-lg shadow-md overflow-hidden">
+                <iframe class="w-full h-full border-0" loading="lazy"
+                    src="https://www.google.com/maps?q={{ urlencode($companyInfo->alamat_perusahaan) }}&output=embed">
+                </iframe>
             </div>
+
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
@@ -105,7 +107,7 @@
 
                     </div>
 
-                    <h3 class="text-gray-500 font-bold text-xl">+62 812 xxxx xxxx (WhatsApp)</h3>
+                    <h3 class="text-gray-500 font-bold text-xl">{{ $companyInfo->telepon_perusahaan }}</h3>
                 </div>
 
                 <div class="flex flex-row gap-3 items-center">
@@ -123,7 +125,7 @@
 
                     </div>
 
-                    <h3 class="text-gray-500 font-bold text-xl">info@bskindonesia.com</h3>
+                    <h3 class="text-gray-500 font-bold text-xl">{{ $companyInfo->email_perusahaan }}</h3>
                 </div>
 
 
@@ -131,9 +133,11 @@
         </div>
     </section>
 
-     <section class="bg-gray-200 py-50 text-center">
+    <section class="bg-gray-200 py-50 text-center">
         <h1 class="text-4xl text-blue-800 font-bold max-w-3xl mx-auto leading-tight">Siap Bermitra dengan Kami?</h1>
-        <p class="text-2xl text-gray-500 font-bold max-w-5xl mx-auto leading-tight mt-5">Tim profesional kami siap membantu Anda menemukan solusi material yang tepat untuk kebutuhan industri Anda. Dapatkan konsultasi gratis dan penawaran terbaik hari ini.</p>
+        <p class="text-2xl text-gray-500 font-bold max-w-5xl mx-auto leading-tight mt-5">Tim profesional kami siap
+            membantu Anda menemukan solusi material yang tepat untuk kebutuhan industri Anda. Dapatkan konsultasi gratis
+            dan penawaran terbaik hari ini.</p>
 
     </section>
 

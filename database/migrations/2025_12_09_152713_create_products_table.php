@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('harga_produk');
             $table->string('nama_produk');
             $table->text('deskripsi_produk');
+            $table->boolean('is_favorite')->default(false);
             $table->string('gambar_produk');
             $table->timestamps();
         });

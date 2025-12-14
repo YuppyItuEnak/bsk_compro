@@ -8,17 +8,17 @@ Route::get('/', function () {
     return view('users_pages.home');
 });
 
-Route::get('/product', function (){
-    return view('users_pages.product');
-});
+// Route::get('/product', function (){
+//     return view('users_pages.product');
+// });
 
-Route::get('/article', function (){
-    return view('users_pages.article');
-});
+// Route::get('/article', function (){
+//     return view('users_pages.article');
+// });
 
-Route::get('/contact', function (){
-    return view('users_pages.contact');
-});
+// Route::get('/contact', function (){
+//     return view('users_pages.contact');
+// });
 
 Route::get('/about', function (){
     return view('users_pages.about_us');
@@ -39,25 +39,25 @@ Route::post("/login/loginProcess", [UserController::class, 'loginProcess'])->nam
 Route::post("/logout", [UserController::class, 'logout'])->name('logout');
 
 // Admin Routes
-Route::get("/admin/dashboard", function () {
-    return view('admin_pages.dashboard_admin');
-});
+// Route::get("/admin/dashboard", function () {
+//     return view('admin_pages.dashboard_admin');
+// });
 
-Route::get("/admin/products", function () {
-    return view('admin_pages.products.index');
-});
+// Route::get("/admin/products", function () {
+//     return view('admin_pages.products.index');
+// });
 
-Route::get("/admin/articles", function () {
-    return view('admin_pages.articles.index');
-});
+// Route::get("/admin/articles", function () {
+//     return view('admin_pages.articles.index');
+// });
 
-Route::get("/admin/company-info", function () {
-    return view('admin_pages.info_perusahaan.index');
-});
+// Route::get("/admin/company-info", function () {
+//     return view('admin_pages.info_perusahaan.index');
+// });
 
-Route::resource('adminProducts', App\Http\Controllers\ProductsController::class);
-Route::resource('admin/articles', App\Http\Controllers\ArticlesController::class);
-Route::resource('admin/company-info', App\Http\Controllers\InfoPerusahaanController::class);
+Route::resource('products', App\Http\Controllers\ProductsController::class);
+Route::resource('articles', App\Http\Controllers\ArticlesController::class);
+Route::resource('companyInfo', App\Http\Controllers\InfoPerusahaanController::class);
 
 
 

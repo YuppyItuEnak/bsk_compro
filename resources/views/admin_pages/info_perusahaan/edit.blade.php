@@ -8,10 +8,10 @@
 
         {{-- PERHATIAN PADA METHOD: Untuk update, gunakan PUT/PATCH.
              Pastikan route Anda disetel untuk menerima PUT/PATCH --}}
-        <form action="{{ route('companyInfo.store') }}" method="POST">
+        <form action="{{ route('companyInfo.update', $companyInfo->id) }}" method="POST">
             @csrf
             {{-- Menggunakan @method('PUT') adalah standar untuk operasi update --}}
-            @method('POST')
+            @method('PUT')
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -36,7 +36,7 @@
                         </label>
                         <textarea id="alamat_perusahaan" name="alamat_perusahaan" rows="4"
                             class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3 transition duration-150"
-                            required>{{ $companyInfo->alamat_perusahaan ?? 'Jl. Contoh No. 123, Kota ABC' }}</textarea>
+                            required>{{ $companyInfo->alamat_perusahaan ?? 'Masukan Alamat Perusahaan' }}</textarea>
                     </div>
 
                     {{-- 2. Email Perusahaan --}}
@@ -75,7 +75,7 @@
                             Telepon Perusahaan
                         </label>
                         <input type="tel" id="telepon_perusahaan" name="telepon_perusahaan"
-                            value="{{ $companyInfo->telepon_perusahaan ?? '+628123456789' }}"
+                            value="{{ $companyInfo->telepon_perusahaan ?? '+62xxxxx' }}"
                             class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 px-4 py-2 transition duration-150"
                             required>
                     </div>

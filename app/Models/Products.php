@@ -10,6 +10,7 @@ class Products extends Model
         'harga_produk',
         'nama_produk',
         'deskripsi_produk',
+        'is_favorite',
         'gambar_produk',
     ];
 }

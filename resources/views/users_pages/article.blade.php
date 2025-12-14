@@ -22,30 +22,17 @@
 
         <!-- Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-            <x-card-article image="images/dumm4.jpg" date="10 Januari 2025" time="09:00"
-                title="Komitmen BSK Indonesia terhadap Lingkungan Berkelanjutan"
-                description="Langkah nyata PT. BSK Indonesia dalam mengurangi emisi karbon dan menerapkan praktik manufaktur yang ramah lingkungan di industri karet."></x-card-article>
-
-            <x-card-article image="images/dumm4.jpg" date="10 Januari 2025" time="09:00"
-                title="Komitmen BSK Indonesia terhadap Lingkungan Berkelanjutan"
-                description="Langkah nyata PT. BSK Indonesia dalam mengurangi emisi karbon dan menerapkan praktik manufaktur yang ramah lingkungan di industri karet."></x-card-article>
-
-            <x-card-article image="images/dumm4.jpg" date="10 Januari 2025" time="09:00"
-                title="Komitmen BSK Indonesia terhadap Lingkungan Berkelanjutan"
-                description="Langkah nyata PT. BSK Indonesia dalam mengurangi emisi karbon dan menerapkan praktik manufaktur yang ramah lingkungan di industri karet."></x-card-article>
-
-            <x-card-article image="images/dumm4.jpg" date="10 Januari 2025" time="09:00"
-                title="Komitmen BSK Indonesia terhadap Lingkungan Berkelanjutan"
-                description="Langkah nyata PT. BSK Indonesia dalam mengurangi emisi karbon dan menerapkan praktik manufaktur yang ramah lingkungan di industri karet."></x-card-article>
-
-            <x-card-article image="images/dumm4.jpg" date="10 Januari 2025" time="09:00"
-                title="Komitmen BSK Indonesia terhadap Lingkungan Berkelanjutan"
-                description="Langkah nyata PT. BSK Indonesia dalam mengurangi emisi karbon dan menerapkan praktik manufaktur yang ramah lingkungan di industri karet."></x-card-article>
-
-            <x-card-article image="images/dumm4.jpg" date="10 Januari 2025" time="09:00"
-                title="Komitmen BSK Indonesia terhadap Lingkungan Berkelanjutan"
-                description="Langkah nyata PT. BSK Indonesia dalam mengurangi emisi karbon dan menerapkan praktik manufaktur yang ramah lingkungan di industri karet."></x-card-article>
-
+            @forelse ($articles as $article)
+                <x-card-article image="{{ asset('storage/' . $article->gambar_artikel) }}"
+                    date="{{ $article->created_at->translatedFormat('d F Y') }}"
+                    time="{{ $article->created_at->format('H:i') }}" title="{{ $article->judul_artikel }}"
+                    description="{{ Str::limit($article->isi_artikel, 120) }}" />
+            @empty
+                <p class="col-span-3 text-center text-gray-500">
+                    Artikel belum tersedia.
+                </p>
+            @endforelse
         </div>
+
     </section>
 </x-layouts.users.layout>
