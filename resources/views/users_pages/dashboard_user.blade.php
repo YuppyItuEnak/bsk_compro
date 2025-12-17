@@ -23,14 +23,10 @@
                             </span>
 
                             <div class="flex gap-3 w-full justify-center">
-                                <button type="button"
+                                <a href="{{ route('auth.edit', $user->id) }}" type="button"
                                     class="flex-1 text-white bg-blue-600 hover:bg-blue-700 rounded-xl text-base font-semibold px-4 py-2 transition duration-200 shadow-md">
                                     Edit Profil
-                                </button>
-                                <button type="button"
-                                    class="flex-1 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl text-base font-medium px-4 py-2 transition duration-200 border border-gray-200">
-                                    Hapus Akun
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -157,8 +153,7 @@
                                     class="absolute flex items-center justify-center w-3 h-3 bg-blue-100 rounded-full -left-1.5 ring-4 ring-white">
                                     <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
-                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                                            clip-rule="evenodd">
+                                            d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
                                         </path>
                                     </svg>
                                 </span>

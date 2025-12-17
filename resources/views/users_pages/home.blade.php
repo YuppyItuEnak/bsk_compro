@@ -32,11 +32,15 @@
                 olahraga, hingga elektronik dengan standar kualitas internasional dan harga kompetitif.
             </p>
 
-            <button
-                class="px-5 py-3 bg-blue-800 text-white rounded-lg
-                       mx-auto md:mx-0 block hover:bg-blue-700 transition">
+
+            <a href="/about" type="button"
+                class="text-white bg-blue-800 border border-transparent
+           hover:bg-blue-700 focus:ring-4 focus:ring-blue-300
+           shadow-md font-medium rounded-lg text-sm px-5 py-2.5
+           focus:outline-none transition duration-150">
                 Pelajari Lebih Lanjut
-            </button>
+            </a>
+
         </div>
     </section>
 
@@ -60,19 +64,19 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                 {{-- JIKA USER SUDAH LOGIN --}}
-                @auth
-                    @forelse ($productUnggulan->where('is_favorite', true) as $product)
-                        <x-card-product class="h-full" title="{{ $product->nama_produk }}"
-                            harga="Rp {{ number_format($product->harga_produk, 0, ',', '.') }}"
-                            image="{{ asset('storage/' . $product->gambar_produk) }}"
-                            description="{{ Str::limit($product->deskripsi_produk, 100) }}"
-                            routeLink="{{ route('products.show', $product->id) }}" />
-                    @empty
-                        <p class="col-span-3 text-center text-gray-500">
-                            Produk unggulan belum tersedia.
-                        </p>
-                    @endforelse
-                @endauth
+
+                @forelse ($productUnggulan->where('is_favorite', true) as $product)
+                    <x-card-product class="h-full" title="{{ $product->nama_produk }}"
+                        harga="Rp {{ number_format($product->harga_produk, 0, ',', '.') }}"
+                        image="{{ asset('storage/' . $product->gambar_produk) }}"
+                        description="{{ Str::limit($product->deskripsi_produk, 100) }}"
+                        routeLink="{{ route('products.show', $product->id) }}" />
+                @empty
+                    <p class="col-span-3 text-center text-gray-500">
+                        Produk unggulan belum tersedia.
+                    </p>
+                @endforelse
+
 
 
                 {{-- JIKA USER BELUM LOGIN --}}
@@ -126,7 +130,7 @@
             <img src="images/dumm2.jpeg" class="rounded-lg shadow w-full h-auto object-cover" />
 
             <!-- Konten -->
-            <div class="flex flex-col justify-center">
+            <div class="flex flex-col"> {{-- Hapus justify-center dari sini --}}
                 <h2 class="text-4xl font-bold text-blue-800 mb-4">Teknologi Produksi Modern</h2>
 
                 <p class="text-gray-600 leading-relaxed mb-4">
@@ -135,62 +139,46 @@
                     konsistensi yang sempurna.
                 </p>
 
-                <!-- Custom Bullet List -->
+                @php
+                    $svgIcon = '
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z"
+                    stroke="#D22F27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8.21 13.8899L7 22.9999L12 19.9999L17 22.9999L15.79 13.8799" stroke="#D22F27"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        ';
+                @endphp
+
                 <ul class="space-y-4 mb-6">
                     <li class="flex items-start gap-3">
-                        <!-- SVG Icon -->
-                        <span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z"
-                                    stroke="#D22F27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M8.21 13.8899L7 22.9999L12 19.9999L17 22.9999L15.79 13.8799" stroke="#D22F27"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
+                        <span>{!! $svgIcon !!}</span>
                         <span class="text-gray-600 leading-relaxed">
                             Proses produksi otomatis untuk efisiensi maksimal.
                         </span>
                     </li>
 
                     <li class="flex items-start gap-3">
-                        <span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z"
-                                    stroke="#D22F27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M8.21 13.8899L7 22.9999L12 19.9999L17 22.9999L15.79 13.8799" stroke="#D22F27"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
+                        <span>{!! $svgIcon !!}</span>
                         <span class="text-gray-600 leading-relaxed">
                             Sistem kontrol kualitas terintegrasi di setiap tahap produksi.
                         </span>
                     </li>
 
                     <li class="flex items-start gap-3">
-                        <span>
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z"
-                                    stroke="#D22F27" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path d="M8.21 13.8899L7 22.9999L12 19.9999L17 22.9999L15.79 13.8799" stroke="#D22F27"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </span>
+                        <span>{!! $svgIcon !!}</span>
                         <span class="text-gray-600 leading-relaxed">
                             Kemampuan produksi skala besar dengan waktu pengiriman yang cepat.
                         </span>
                     </li>
                 </ul>
 
-                <button class="px-5 py-3 bg-blue-800 text-white rounded-lg">
+                {{-- TOMBOL: Menghapus mx-auto dan menambahkan w-fit --}}
+                <a href="/about" class="px-5 py-3 bg-blue-800 text-white rounded-lg w-fit mt-4 hover:bg-blue-700 transition">
                     Pelajari Teknologi Kami
-                </button>
+                </a>
             </div>
         </div>
     </section>

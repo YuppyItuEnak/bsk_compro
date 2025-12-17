@@ -24,9 +24,9 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
             @forelse ($articles as $article)
                 <x-card-article image="{{ asset('storage/' . $article->gambar_artikel) }}"
-                    date="{{ $article->created_at->translatedFormat('d F Y') }}"
-                    time="{{ $article->created_at->format('H:i') }}" title="{{ $article->judul_artikel }}"
-                    description="{{ Str::limit($article->isi_artikel, 120) }}" />
+                    date="{{ \Carbon\Carbon::parse($article->waktu_publikasi)->translatedFormat('d F Y') }}"
+                    time="{{ \Carbon\Carbon::parse($article->waktu_publikasi)->format('H:i') }}"
+                    title="{{ $article->judul_artikel }}" description="{{ Str::limit($article->isi_artikel, 120) }}" />
             @empty
                 <p class="col-span-3 text-center text-gray-500">
                     Artikel belum tersedia.

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -113,7 +114,7 @@ class UserController extends Controller
             }
 
             // default
-            return redirect('/dashboard');
+            return redirect()->route('auth.index');
         }
 
         // Jika email/password salah
@@ -146,7 +147,12 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = Auth::user();
+        if ($user->role === "admin") {
+            return view('admin_pages.accounts.edit', compact('user'));
+        } elseif ($user->role === "user") {
+            return view('users_pages.accounts.edit', compact('user'));
+        }
     }
 
     /**
@@ -154,7 +160,43 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', 'unique:users,email,' . $user->id],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'password' => ['nullable', 'confirmed', 'min:8'],
+            'file_upload' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ]);
+
+        // Update basic profile data
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->phone = $validated['phone'] ?? null;
+
+        // Update password (jika diisi)
+        if (!empty($validated['password'])) {
+            $user->password = Hash::make($validated['password']);
+        }
+
+        // Upload foto profil (jika ada)
+        if ($request->hasFile('file_upload')) {
+
+            // Hapus foto lama jika ada
+            if ($user->image_url && Storage::disk('public')->exists($user->image_url)) {
+                Storage::disk('public')->delete($user->image_url);
+            }
+
+            $path = $request->file('file_upload')->store('users/profile', 'public');
+            $user->image_url = $path;
+        }
+
+        $user->save();
+
+        return redirect()
+            ->route('auth.index')
+            ->with('success', 'Profil berhasil diperbarui.');
     }
 
     /**
