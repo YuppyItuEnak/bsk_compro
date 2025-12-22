@@ -28,7 +28,7 @@ class InfoPerusahaanController extends Controller
         }
 
         if (!$companyInfo) {
-           return view('widget_messages_pages.error_messages');
+            return view('widget_messages_pages.error_messages');
         }
         return view('users_pages.contact', compact('companyInfo'));
     }
@@ -48,9 +48,17 @@ class InfoPerusahaanController extends Controller
     {
         // dd((new Info_Perusahaans)->getTable());
         $validated = $request->validate([
+            'nama_perusahaan'    => 'required|string|max:255',
+            'tentang_perusahaan' => 'required|string',
+            'visi_perusahaan'    => 'required|string',
+            'misi_perusahaan'    => 'required|string',
             'alamat_perusahaan'      => 'required|string|max:255',
             'email_perusahaan'     => 'required|string|max:255',
-            'telepon_perusahaan' => 'required|string|max:255',
+            'telepon_perusahaan' => 'nullable|string|max:20',
+            'insta_link'         => 'nullable|url',
+            'facebook_link'      => 'nullable|url',
+            'tiktok_link'        => 'nullable|url',
+
         ]);
 
         Info_Perusahaans::create($validated);
@@ -63,10 +71,7 @@ class InfoPerusahaanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Info_Perusahaans $info_perusahaan)
-    {
-        //
-    }
+    public function show(Info_Perusahaans $info_perusahaan) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -82,9 +87,16 @@ class InfoPerusahaanController extends Controller
     public function update(Request $request, Info_Perusahaans $companyInfo)
     {
         $validated = $request->validate([
+            'nama_perusahaan'    => 'required|string|max:255',
+            'tentang_perusahaan' => 'required|string', // Hapus max:255
+            'visi_perusahaan'    => 'required|string', // Hapus max:255
+            'misi_perusahaan'    => 'required|string', // Hapus max:255
             'alamat_perusahaan'  => 'required|string',
-            'email_perusahaan'   => 'required|email',
-            'telepon_perusahaan' => 'required|string|max:20',
+            'email_perusahaan'     => 'required|string|max:255',
+            'telepon_perusahaan' => 'nullable|string|max:20',
+            'insta_link'         => 'nullable|url',
+            'facebook_link'      => 'nullable|url',
+            'tiktok_link'        => 'nullable|url',
         ]);
 
         $companyInfo->update($validated);

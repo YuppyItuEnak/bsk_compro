@@ -2,8 +2,8 @@
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse group">
-            <img src="{{ $user->image_url ?? 'images/dumm3.jpg' }}"
-                class="h-10 w-10 object-cover rounded-full transition duration-300 group-hover:shadow-md"
+            <img src="images/logo.png"
+                class="h-10 w-10 object-cover transition duration-300 group-hover:shadow-md"
                 alt="Logo Perusahaan">
             <div class="font-bold">
                 <p class="self-center text-xl font-extrabold whitespace-nowrap"><span class="text-blue-700">PT.
@@ -105,7 +105,7 @@
                 <li><a href="{{ route('articles.index') }}"
                         class="block py-2 px-3 text-gray-700 hover:text-blue-700 transition duration-150 md:p-0">Artikel</a>
                 </li>
-                <li><a href="/about"
+                <li><a href="{{ route('tentangkami.index') }}"
                         class="block py-2 px-3 text-gray-700 hover:text-blue-700 transition duration-150 md:p-0">Tentang</a>
                 </li>
                 <li><a href="{{ route('companyInfo.index') }}"

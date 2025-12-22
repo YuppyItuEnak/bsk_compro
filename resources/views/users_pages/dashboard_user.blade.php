@@ -68,18 +68,23 @@
                             class="rounded-xl border-l-4 border-blue-600 bg-white p-6 shadow-lg transition duration-300 hover:shadow-xl">
                             <div class="flex items-center justify-between">
                                 <p class="text-sm font-medium uppercase tracking-wider text-gray-500">
-                                    <i class="fas fa-calendar-day mr-2 text-blue-500"></i> Hari Menjadi Member
+                                    <i class="fas fa-calendar-day mr-2 text-blue-500"></i>
+                                    Hari Menjadi Member
                                 </p>
                                 <svg class="h-6 w-6 text-blue-500" fill="none" stroke="currentColor"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-4 4h4M4 11h16m-2 4h-4m-6 0h-4m-2 4h12M4 7h16"></path>
+                                        d="M8 7V3m8 4V3m-4 4h4M4 11h16m-2 4h-4m-6 0h-4m-2 4h12M4 7h16" />
                                 </svg>
                             </div>
-                            <p class="mt-2 text-2xl font-extrabold text-gray-900">
-                                {{ \Carbon\Carbon::parse($user->created_at)->diffInDays(\Carbon\Carbon::now()) }}
+
+                            <p class="mt-2 text-3xl font-extrabold text-gray-900">
+                                {{-- Menggunakan floor untuk membuang angka desimal --}}
+                                {{ floor(\Carbon\Carbon::parse($user->created_at)->diffInDays(now())) }}
+                                <span class="text-lg font-medium text-gray-500 tracking-normal">hari</span>
                             </p>
                         </div>
+
 
 
                         <div

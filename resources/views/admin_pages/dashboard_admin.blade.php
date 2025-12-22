@@ -82,7 +82,8 @@
                     </path>
                 </svg>
             </div>
-            <span class="text-xs font-medium text-gray-500 mt-4 block border-t pt-2">Lihat Daftar Pengguna &rarr;</span>
+            <a href="{{ route('userlist') }}"
+                class="text-xs font-medium text-gray-500 mt-4 block border-t pt-2">Lihat Daftar Pengguna &rarr;</a>
         </div>
     </div>
 
@@ -145,7 +146,7 @@
 
                     {{-- Waktu --}}
                     <time class="block mb-2 text-xs font-normal leading-none text-gray-500">
-                        {{ $activity->created_at->diffForHumans() }} - {{ $activity->waktu_publikasi}}
+                        {{ $activity->created_at->diffForHumans() }} - {{ $activity->waktu_publikasi }}
                     </time>
 
                     {{-- Detail --}}

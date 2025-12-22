@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Articles;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticlesController extends Controller
 {
@@ -85,8 +86,16 @@ class ArticlesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(articles $articles)
+    public function destroy(articles $article)
     {
-        //
+       if ($article->image) {
+            Storage::disk('public')->delete($article->image);
+        }
+
+        $article->delete();
+
+        return redirect()
+            ->route('articles.index')
+            ->with('success', 'Product berhasil dihapus');
     }
 }

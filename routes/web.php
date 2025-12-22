@@ -5,8 +5,11 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('users_pages.home');
+    return redirect()->route('dashboard.index');
 });
+
+Route::get('/userlist', [DashboardController::class, 'userlist'])->name('userlist');
+Route::delete('/deleteuser/{user}', [DashboardController::class, 'deleteuser'])->name('userlist.delete');
 
 
 Route::get('/about', function (){
@@ -31,6 +34,8 @@ Route::post("/logout", [UserController::class, 'logout'])->name('logout');
 Route::resource('products', App\Http\Controllers\ProductsController::class);
 Route::resource('articles', App\Http\Controllers\ArticlesController::class);
 Route::resource('companyInfo', App\Http\Controllers\InfoPerusahaanController::class);
+Route::resource('tentangkami', App\Http\Controllers\TentangKamiController::class);
+
 
 
 

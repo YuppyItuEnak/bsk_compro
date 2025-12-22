@@ -6,8 +6,7 @@
 
     <div class="bg-white rounded-xl shadow-2xl p-8 max-w-4xl mx-auto border border-gray-100">
 
-        {{-- PERHATIAN PADA METHOD: Untuk update, gunakan PUT/PATCH.
-             Pastikan route Anda disetel untuk menerima PUT/PATCH --}}
+        
         <form action="{{ route('companyInfo.update', $companyInfo->id) }}" method="POST">
             @csrf
             {{-- Menggunakan @method('PUT') adalah standar untuk operasi update --}}

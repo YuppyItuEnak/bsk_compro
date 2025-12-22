@@ -8,6 +8,7 @@ use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Polyfill\Intl\Idn\Info;
 
 class DashboardController extends Controller
@@ -24,7 +25,7 @@ class DashboardController extends Controller
             $totalProducts = Products::count();
             $totalArticles = Articles::count();
 
-            $totalUser = User::where('role', 'user')->count();;
+            $totalUser = User::where('role', 'user')->count();
             // Artikel 7 hari terakhir
             $recentArticles = Articles::where('created_at', '>=', now()->subDays(7))->count();
 
@@ -72,6 +73,7 @@ class DashboardController extends Controller
                 'totalProducts',
                 'totalArticles',
                 'totalUser',
+
                 'recentArticles',
                 'activities'
             ));
@@ -79,6 +81,21 @@ class DashboardController extends Controller
         $productUnggulan = Products::all();
         return view("users_pages.home", compact('user', 'productUnggulan'));
     }
+
+    public function userlist()
+    {
+        // if (Auth::user()->role !== 'admin') {
+        //     abort(403, 'Unauthorized');
+        // }
+
+        $user = User::where('role', 'user')->get();
+
+        return view('admin_pages.user_index_page', compact('user'));
+        // return response('VIEW DIPANGGIL');
+
+        // return view('admin_pages.user_index_page');
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -99,10 +116,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+    public function show(string $id) {}
 
     /**
      * Show the form for editing the specified resource.
@@ -123,8 +137,22 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+       //
+    }
+
+    public function deleteuser (User $user){
+        // $user = User::where('role', 'user')->get();
+        // dd($user);
+        if ($user->image_url) {
+            Storage::disk('public')->delete($user->image_url);
+        }
+
+        $user->delete();
+
+        return redirect()
+            ->route('userlist')
+            ->with('success', 'Product berhasil dihapus');
     }
 }

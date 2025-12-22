@@ -18,7 +18,7 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://metatags.io/" />
-    <meta property="og:title" content="Predator" />
+    <meta property="og:title" content="Berkah Sarana Karet" />
     {{-- <meta property="og:description"
         content="Dapatkan karpet alas sapi terbaik! Dirancang khusus untuk kenyamanan ternak, anti selip, mudah dibersihkan, dan tahan lama. Cocok untuk peternakan modern!" />
     <meta property="og:image" content="{{ asset('photos/predator-logo.png') }}" /> --}}
