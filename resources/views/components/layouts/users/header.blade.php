@@ -6,7 +6,7 @@
                 class="h-10 w-10 object-cover transition duration-300 group-hover:shadow-md"
                 alt="Logo Perusahaan">
             <div class="font-bold">
-                <p class="self-center text-xl font-extrabold whitespace-nowrap"><span class="text-blue-700">PT.
+                <p class="self-center text-xl font-extrabold whitespace-nowrap"><span class="text-[#002473]">PT.
                         BSK</span><span class="text-red-600"> Indonesia</span></p>
                 <p class="text-xs text-gray-500 font-semibold">
                     Berkah Sarana Karet
@@ -63,7 +63,7 @@
 
             @guest
                 <button id="dropdownDefaultButton" data-dropdown-toggle="guestDropdown"
-                    class="inline-flex items-center justify-center text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 transition duration-200 shadow-md"
+                    class="inline-flex items-center justify-center text-white bg-[#002473] hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 transition duration-200 shadow-md"
                     type="button">
                     Masuk/Registrasi
                     <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"

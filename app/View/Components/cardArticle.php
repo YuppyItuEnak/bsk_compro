@@ -13,16 +13,18 @@ class cardArticle extends Component
     public $title;
     public $image;
     public $description;
+    public $routeLink;
     /**
      * Create a new component instance.
      */
-    public function __construct($date, $time, $title, $image, $description)
+    public function __construct($date, $time, $title, $image, $description, $routeLink)
     {
         $this->date = $date;
         $this->time = $time;
         $this->title = $title;
         $this->image = $image;
         $this->description = $description;
+        $this->routeLink = $routeLink;
     }
 
     /**

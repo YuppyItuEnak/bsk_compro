@@ -113,7 +113,7 @@
 
                     <!-- CARD 1 -->
                     <div class="border rounded-xl bg-white shadow p-6 text-left flex flex-col items-start">
-                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                        <div class="w-12 h-12 bg-[#002473] rounded-lg flex items-center justify-center">
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -125,7 +125,7 @@
                             </svg>
 
                         </div>
-                        <h3 class="text-blue-700 font-bold text-lg mt-3">Integrity</h3>
+                        <h3 class="text-[#002473] font-bold text-lg mt-3">Integrity</h3>
                         <p class="text-gray-600 text-sm mt-1">
                             Integritas dalam setiap aspek bisnis dan komitmen terhadap kejujuran.
                         </p>
@@ -133,7 +133,7 @@
 
                     <!-- CARD 2 -->
                     <div class="border rounded-xl bg-white shadow p-6 text-left flex flex-col items-start">
-                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
+                        <div class="w-12 h-12 bg-[#002473] rounded-lg flex items-center justify-center">
                             <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -142,7 +142,7 @@
                             </svg>
 
                         </div>
-                        <h3 class="text-red-600 font-bold text-lg mt-3">Quality</h3>
+                        <h3 class="text-[#002473] font-bold text-lg mt-3">Quality</h3>
                         <p class="text-gray-600 text-sm mt-1">
                             Kualitas produk terbaik dengan standar internasional yang konsisten.
                         </p>
@@ -150,7 +150,7 @@
 
                     <!-- CARD 3 -->
                     <div class="border rounded-xl bg-white shadow p-6 text-left flex flex-col items-start">
-                        <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                        <div class="w-12 h-12 bg-[#002473] rounded-lg flex items-center justify-center">
                             <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -164,7 +164,7 @@
                             </svg>
 
                         </div>
-                        <h3 class="text-green-600 font-bold text-lg mt-3">Sustainability</h3>
+                        <h3 class="text-[#002473] font-bold text-lg mt-3">Sustainability</h3>
                         <p class="text-gray-600 text-sm mt-1">
                             Komitmen terhadap praktik bisnis yang ramah lingkungan.
                         </p>
@@ -176,7 +176,7 @@
 
                     <!-- CARD 4 -->
                     <div class="border rounded-xl bg-white shadow p-6 text-left flex flex-col items-start">
-                        <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                        <div class="w-12 h-12 bg-[#002473] rounded-lg flex items-center justify-center">
                             <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -185,7 +185,7 @@
                             </svg>
 
                         </div>
-                        <h3 class="text-blue-700 font-bold text-lg mt-3">Innovation</h3>
+                        <h3 class="text-[#002473] font-bold text-lg mt-3">Innovation</h3>
                         <p class="text-gray-600 text-sm mt-1">
                             Inovasi berkelanjutan untuk solusi material yang lebih baik.
                         </p>
@@ -193,7 +193,7 @@
 
                     <!-- CARD 5 -->
                     <div class="border rounded-xl bg-white shadow p-6 text-left flex flex-col items-start">
-                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
+                        <div class="w-12 h-12 bg-[#002473] rounded-lg flex items-center justify-center">
                             <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -211,7 +211,7 @@
 
 
                         </div>
-                        <h3 class="text-red-600 font-bold text-lg mt-3">Customer Focus</h3>
+                        <h3 class="text-[#002473] font-bold text-lg mt-3">Customer Focus</h3>
                         <p class="text-gray-600 text-sm mt-1">
                             Kepuasan pelanggan adalah prioritas utama kami.
                         </p>
@@ -245,7 +245,7 @@
                             class="group p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-blue-200 hover:bg-white hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start gap-5">
                                 <div
-                                    class="flex-shrink-0 w-14 h-14 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
+                                    class="flex-shrink-0 w-14 h-14 bg-[#002473] text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
                                     <svg width="32" height="32" viewBox="0 0 40 40" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -273,7 +273,7 @@
                             class="group p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-blue-200 hover:bg-white hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start gap-5">
                                 <div
-                                    class="flex-shrink-0 w-14 h-14 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
+                                    class="flex-shrink-0 w-14 h-14 bg-[#002473] text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
                                     <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -295,7 +295,7 @@
                             class="group p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-blue-200 hover:bg-white hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start gap-5">
                                 <div
-                                    class="flex-shrink-0 w-14 h-14 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
+                                    class="flex-shrink-0 w-14 h-14 bg-[#002473] text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
                                     <svg width="43" height="43" viewBox="0 0 43 43" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -322,7 +322,7 @@
                             class="group p-8 bg-gray-50 rounded-2xl border border-transparent hover:border-blue-200 hover:bg-white hover:shadow-xl transition-all duration-300">
                             <div class="flex items-start gap-5">
                                 <div
-                                    class="flex-shrink-0 w-14 h-14 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
+                                    class="flex-shrink-0 w-14 h-14 bg-[#002473] text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-100 group-hover:rotate-6 transition-transform">
                                     <svg width="39" height="39" viewBox="0 0 39 39" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path

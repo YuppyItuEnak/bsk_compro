@@ -96,15 +96,30 @@
                                     </button>
 
                                     {{-- Konten Dropdown (Ditambahkan ABSOLUTE dan RIGHT-0) --}}
-                                    <div id="dropdown"
+                                    <div id="dropdown{{ $product->id }}"
                                         class="z-20 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-40 absolute right-0 mt-2 origin-top-right">
 
                                         <ul class="py-2 text-sm text-gray-700">
 
+                                            {{-- Tombol Edit --}}
+                                            <li>
+                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                    class="block px-4 py-2 hover:bg-gray-100 text-indigo-600 font-medium flex items-center">
+                                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2"
+                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.284-8.284z">
+                                                        </path>
+                                                    </svg>
+                                                    Edit
+                                                </a>
+                                            </li>
 
                                             {{-- Tombol Hapus --}}
                                             <li>
-                                                <form action="#" method="POST">
+                                                <form action="{{ route('products.destroy', $product->id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"

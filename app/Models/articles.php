@@ -12,4 +12,8 @@ class Articles extends Model
         'gambar_artikel',
         'waktu_publikasi',
     ];
+
+    protected $casts = [
+        'waktu_publikasi' => 'datetime',
+    ];
 }

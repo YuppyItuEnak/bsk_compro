@@ -63,6 +63,7 @@
                         date="{{ \Carbon\Carbon::parse($article->waktu_publikasi)->translatedFormat('d F Y') }}"
                         time="{{ \Carbon\Carbon::parse($article->waktu_publikasi)->format('H:i') }}"
                         title="{{ $article->judul_artikel }}" description="{{ Str::limit($article->isi_artikel, 120) }}"
+                        routeLink="{{ route('articles.show', $article->id) }}"
                         class="transition-all duration-500 transform group-hover:-translate-y-2" />
                 </div>
             @empty
@@ -78,8 +79,6 @@
             @endforelse
         </div>
 
-        <div class="mt-20 flex justify-center">
-            {{-- $articles->links() --}}
-        </div>
+
     </section>
 </x-layouts.users.layout>

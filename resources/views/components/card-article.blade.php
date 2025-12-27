@@ -45,7 +45,7 @@
             {{ $description }}
         </p>
 
-        <a href="#" class=" w-full text-center text-blue-800 font-medium text-sm">
+        <a href="{{ $routeLink }}" class=" w-full text-center text-blue-800 font-medium text-sm">
             Baca Lebih Lanjut →
         </a>
     </div>

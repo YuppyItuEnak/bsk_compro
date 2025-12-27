@@ -6,27 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    {{-- <link rel="icon" href="{{ asset('photos/predator-logo.png') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('photos/predator-logo.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
 
     <!-- Primary Meta Tags -->
-    <title>{{ $metaTitle ?? 'Predator - Karpet Alas Sapi Berkualitas' }}</title>
-    <meta name="description" content="{{ $metaDescription ?? '' }}">
-    <meta name="keywords" content="{{ $metaKeywords ?? '' }}"> --}}
+    <title>{{'Berkah Sarana Karet' }}</title>
 
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://metatags.io/" />
-    <meta property="og:title" content="Predator" />
-    {{-- <meta property="og:description"
-        content="Dapatkan karpet alas sapi terbaik! Dirancang khusus untuk kenyamanan ternak, anti selip, mudah dibersihkan, dan tahan lama. Cocok untuk peternakan modern!" />
-    <meta property="og:image" content="{{ asset('photos/predator-logo.png') }}" /> --}}
-
-
-    {{-- <title>{{ $title ?? 'Predator' }}</title> --}}
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

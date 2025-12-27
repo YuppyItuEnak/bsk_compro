@@ -22,7 +22,6 @@ class ArticlesController extends Controller
         }
 
         return view('users_pages.article', compact('articles'));
-
     }
 
     /**
@@ -62,25 +61,43 @@ class ArticlesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(articles $articles)
+    public function show(articles $article)
     {
-        //
+        return view('users_pages.detail_article', compact('article'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(articles $articles)
+    public function edit(articles $article)
     {
-
+        return view('admin_pages.articles.edit', compact('article'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, articles $articles)
+    public function update(Request $request, articles $article)
     {
-        //
+        $validated = $request->validate([
+            'judul_artikel'   => 'required|string|max:255',
+            'isi_artikel'     => 'required|string',
+            'gambar_artikel'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'waktu_publikasi' => 'nullable|date',
+        ]);
+
+        // Jika upload gambar baru
+        if ($request->hasFile('gambar_artikel')) {
+            $validated['gambar_artikel'] = $request
+                ->file('gambar_artikel')
+                ->store('articles', 'public');
+        }
+
+        $article->update($validated);
+
+        return redirect()
+            ->route('articles.index')
+            ->with('success', 'Artikel berhasil diperbarui');
     }
 
     /**
@@ -88,7 +105,7 @@ class ArticlesController extends Controller
      */
     public function destroy(articles $article)
     {
-       if ($article->image) {
+        if ($article->image) {
             Storage::disk('public')->delete($article->image);
         }
 
